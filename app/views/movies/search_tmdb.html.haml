@@ -1,0 +1,15 @@
+%h1 The following movies containing "#{params[:search_terms]}" were found on TMDb
+
+#table#movies
+  %thead
+    %tr
+      %th Movie Title
+      %th Rating
+      %th Release Date
+      %th Select
+  %tbody
+    - @movies.each do |movie|
+      %tr= movie.title
+      %tr= movie.rating
+      %tr= movie.release_date
+      %tr= check_box_tag
