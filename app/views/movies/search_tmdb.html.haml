@@ -1,15 +1,18 @@
-%h1 The following movies containing "#{params[:search_terms]}" were found on TMDb
+%h1 The following movies containing "#{@search_terms}" were found on TMDb
 
-#table#movies
-  %thead
-    %tr
-      %th Movie Title
-      %th Rating
-      %th Release Date
-      %th Select
-  %tbody
-    - @movies.each do |movie|
-      %tr= movie.title
-      %tr= movie.rating
-      %tr= movie.release_date
-      %tr= check_box_tag
+= form_tag movies_add_from_tmdb_path, :method => :post, :id => "add_form" do
+  #table#movies
+    %thead
+      %tr
+        %th Movie Title
+        %th Rating
+        %th Release Date
+        %th Select
+    %tbody
+      - @movies.each do |movie|
+        %tr
+          %td= movie[:title]
+          %td= movie[:rating]
+          %td= movie[:release_date]
+          %td= check_box_tag "to_add[#{movie[:title]}]", nil, nil, :id => "checkbox_#{movie[:title]}"
+        

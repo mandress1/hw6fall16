@@ -62,24 +62,21 @@ class MoviesController < ApplicationController
   end
   
   def search_tmdb
-    search_terms = params[:search_terms]
-    if search_terms.nil? || search_terms.empty?
+    @search_terms = params[:search_terms]
+    if @search_terms.nil? || @search_terms.empty?
       flash[:notice] = "Invalid search term"
       redirect_to movies_path
     else
-      @movies=Movie.find_in_tmdb(search_terms)
-      puts "WOWOWOWOW"
-      @movies.each do |mov|
-        mov.each do |k, v|
-          puts "#{k}: #{v}"
-        end
-      end
-      puts "WOWOWOW"
+      @movies=Movie.find_in_tmdb(@search_terms)
       if @movies.empty?
         flash[:notice] = "No matiching movies were found"
         redirect_to movies_path
       end
     end
+  end
+  
+  def add_from_tmdb
+    
   end
 
 end
