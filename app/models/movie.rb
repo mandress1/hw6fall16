@@ -13,7 +13,7 @@ class Movie < ActiveRecord::Base
     Tmdb::Api.key("f4702b08c0ac6ea5b51425788bb26562") 
     begin
       Tmdb::Movie.find(string).each do |mov|
-        movies.push({:title => mov.title, :rating => self.get_rating(mov.id), :release_date => mov.release_date})
+        movies.push({:tmdb_id => mov.id, :title => mov.title, :rating => self.get_rating(mov.id), :release_date => mov.release_date})
       end
       return movies
     rescue NoMethodError => tmdb_gem_exception
@@ -36,5 +36,11 @@ class Movie < ActiveRecord::Base
     end
     return rating
   end
-
+  
+  def self.create_from_tmdb(mov_id)
+    Tmdb::Api.key("f4702b08c0ac6ea5b51425788bb26562")
+    mov_details = Tmdb::Movie.detail(mov_id)
+    puts "WOWOWOW\n#{mov_details}\nWOWOWOWOW"
+    Movie.create({:title => mov_details["original_title"], :rating => self.get_rating(mov_id), :release_date => mov_details["release_date"]})
+  end
 end

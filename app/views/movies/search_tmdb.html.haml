@@ -14,7 +14,7 @@
           %td= movie[:title]
           %td= movie[:rating]
           %td= movie[:release_date]
-          %td= check_box_tag "to_add[#{movie[:title]}]", nil, nil, :id => "checkbox_#{movie[:title]}"
+          %td= check_box_tag "to_add[#{movie[:tmdb_id]}]", nil, nil, :id => "checkbox_#{movie[:tmdb_id]}"
   = submit_tag "Add selected movies", :id => "add_button"
     
 %br

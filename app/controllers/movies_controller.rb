@@ -76,7 +76,15 @@ class MoviesController < ApplicationController
   end
   
   def add_from_tmdb
-    puts "WOWOWOW\n#{params[:to_add]}\nWOWOWOWOWO"
+    selected_movs = params[:to_add]
+    if selected_movs.nil? || selected_movs.empty?
+      flash[:notice] = "No movies selected"
+    else
+      selected_movs.keys.each do |mov_id|
+        Movie.create_from_tmdb(mov_id)
+      end
+      flash[:notice] = "Movies successfully to Rotten Potatoes"
+    end
     redirect_to movies_path
   end
 
