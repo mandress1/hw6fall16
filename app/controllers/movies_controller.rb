@@ -76,7 +76,8 @@ class MoviesController < ApplicationController
   end
   
   def add_from_tmdb
-    
+    puts "WOWOWOW\n#{params[:to_add]}\nWOWOWOWOWO"
+    redirect_to movies_path
   end
 
 end

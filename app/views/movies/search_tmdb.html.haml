@@ -1,7 +1,7 @@
 %h1 The following movies containing "#{@search_terms}" were found on TMDb
 
 = form_tag movies_add_from_tmdb_path, :method => :post, :id => "add_form" do
-  #table#movies
+  %table#movies
     %thead
       %tr
         %th Movie Title
@@ -15,4 +15,8 @@
           %td= movie[:rating]
           %td= movie[:release_date]
           %td= check_box_tag "to_add[#{movie[:title]}]", nil, nil, :id => "checkbox_#{movie[:title]}"
+  = submit_tag "Add selected movies", :id => "add_button"
+    
+%br
+= link_to "Return to Movie List", movies_path
         
