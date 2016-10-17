@@ -15,7 +15,7 @@
           %td= movie[:rating]
           %td= movie[:release_date]
           %td= check_box_tag "to_add[#{movie[:tmdb_id]}]", nil, nil, :id => "checkbox_#{movie[:tmdb_id]}"
-  = submit_tag "Add selected movies", :id => "add_button"
+  = submit_tag "Add selected movies", :id => "movies_button"
     
 %br
 = link_to "Return to Movie List", movies_path
