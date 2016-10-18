@@ -3,7 +3,7 @@ require 'themoviedb'
 class Movie < ActiveRecord::Base
   
   def self.all_ratings
-    %w(G PG PG-13 NC-17 R)
+    %w(G PG PG-13 NC-17 R NR)
   end
 
   class Movie::InvalidKeyError < StandardError ; end
@@ -13,6 +13,7 @@ class Movie < ActiveRecord::Base
     Tmdb::Api.key("f4702b08c0ac6ea5b51425788bb26562") 
     begin
       Tmdb::Movie.find(string).each do |mov|
+        puts "#{mov.title}:"
         movies.push({:tmdb_id => mov.id, :title => mov.title, :rating => self.get_rating(mov.id), :release_date => mov.release_date})
       end
       return movies
@@ -29,11 +30,12 @@ class Movie < ActiveRecord::Base
     rating = ""
     Tmdb::Api.key("f4702b08c0ac6ea5b51425788bb26562")
     Tmdb::Movie.releases(tmdb_id)["countries"].each do |loc|
-      if loc["iso_3166_1"] == "US"
+      if loc["iso_3166_1"] == "US" && loc["certification"] != ""
         rating =  loc["certification"]
         break
       end
     end
+    rating = "NR" if (rating.empty? or rating == "")
     return rating
   end
   
