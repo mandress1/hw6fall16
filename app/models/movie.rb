@@ -12,10 +12,10 @@ class Movie < ActiveRecord::Base
     movies = []
     Tmdb::Api.key("f4702b08c0ac6ea5b51425788bb26562") 
     begin
-      Tmdb::Movie.find(string).each do |mov|
-        puts "#{mov.title}:"
+      found_movies = Tmdb::Movie.find(string)
+      found_movies.each do |mov|
         movies.push({:tmdb_id => mov.id, :title => mov.title, :rating => self.get_rating(mov.id), :release_date => mov.release_date})
-      end
+      end unless (found_movies.nil? or found_movies.empty?)
       return movies
     rescue NoMethodError => tmdb_gem_exception
       if Tmdb::Api.response['code'] == '401'

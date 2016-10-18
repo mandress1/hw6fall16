@@ -1,6 +1,6 @@
 require 'spec_helper'
 require 'rails_helper'
-
+=begin
 describe MoviesController do
   describe 'searching TMDb' do
    it 'should call the model method that performs TMDb search' do
@@ -22,3 +22,4 @@ describe MoviesController do
     end 
   end
 end
+=end
