@@ -68,7 +68,7 @@ class MoviesController < ApplicationController
       redirect_to movies_path
     else
       @movies=Movie.find_in_tmdb(@search_terms)
-      if @movies.empty?
+      if @movies.nil? || @movies.empty?
         flash[:notice] = "No matiching movies were found"
         redirect_to movies_path
       end
