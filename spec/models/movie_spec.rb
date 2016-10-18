@@ -15,4 +15,10 @@ describe Movie do
       end
     end
   end
+  describe 'searching for movies' do
+    it 'should return all movies whose titles contain the serach terms' do
+      search_terms = "lethal weapon"
+      Movie.find_in_tmdb(search_terms).each {|movie| expect(movie[:title].downcase).to include(search_terms)}
+    end
+  end
 end
