@@ -38,6 +38,9 @@ gem 'themoviedb'
 group :development do
    # Access an IRB console on exception pages or by using <%= console %> in views
   gem 'web-console' 
+  if ENV["RAILS_VERSION"]
+    gem "activesupport", ENV["RAILS_VERSION"]
+  end
 end
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -58,6 +61,9 @@ group :test do
   gem 'cucumber-rails', :require=>false
   gem 'capybara'
   gem 'database_cleaner'
+  if ENV["RAILS_VERSION"]
+    gem "activesupport", ENV["RAILS_VERSION"]
+  end
 end
 
 group :production do
@@ -65,3 +71,6 @@ group :production do
   gem 'rails_12factor'
 end
 
+group :coverage do
+  gem 'simplecov', :require => false
+end

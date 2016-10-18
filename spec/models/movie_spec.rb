@@ -1,3 +1,4 @@
+require 'spec_helper'
 
 describe Movie do
   describe 'searching Tmdb by keyword' do
